@@ -1,0 +1,57 @@
+package com.example.cp2_activity2;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+
+public class MainActivity extends AppCompatActivity {
+    private TextView integerTextView;
+    private TextView resultTextView;
+    private Button checkButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        integerTextView = findViewById(R.id.integerTextView);
+        resultTextView = findViewById(R.id.resultTextView);
+        checkButton = findViewById(R.id.checkButton);
+
+        // Set a default integer value
+        int number = Integer.parseInt(integerTextView.getText().toString());
+
+        checkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String result = checkEvenOdd(number) + "\n" + getDivisors(number);
+                resultTextView.setText(result);
+            }
+        });
+    }
+
+    // Method to check if the number is even or odd
+    private String checkEvenOdd(int num) {
+        if (num % 2 == 0) {
+            return "The integer value is even";
+        } else {
+            return "The integer value is odd";
+        }
+    }
+
+    // Method to find all divisors of the number
+    private String getDivisors(int num) {
+        StringBuilder divisors = new StringBuilder("Divisors of " + num + ": ");
+        for (int i = 1; i <= num; i++) {
+            if (num % i == 0) {
+                divisors.append(i).append(" ");
+            }
+        }
+        return divisors.toString();
+    }
+}
